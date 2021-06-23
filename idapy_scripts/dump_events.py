@@ -17,6 +17,5 @@ for func_adr in XrefsTo(sendevent_adr, 0):
     if str_adr == 0xffffffffffffffff:
         continue
         
-    print(hex(str_adr))
     real_str_adr = str_adr + ida_bytes.get_wide_dword(str_adr + 3) + 7
     print(ida_bytes.get_strlit_contents(real_str_adr, -1, ida_nalt.STRTYPE_C))
