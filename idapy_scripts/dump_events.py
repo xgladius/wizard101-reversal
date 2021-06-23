@@ -9,7 +9,6 @@ sendevent_adr = call_sendevent_adr + call_offset
 for func_adr in XrefsTo(sendevent_adr, 0):
     f = func_adr.frm
     
-    print(hex(ida_bytes.get_wide_byte(f - 9)))
     if ida_bytes.get_wide_byte(f - 9) == 0xD3: # this means the argument is passed non statically
         continue
     
