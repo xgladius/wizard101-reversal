@@ -13,7 +13,7 @@ for func_adr in XrefsTo(error_sprintf_func, 0):
     name_str = ida_bytes.get_strlit_contents(real_str_adr, -1, ida_nalt.STRTYPE_C)
     idc.set_name(idc.get_func_attr(str_adr, idc.FUNCATTR_START), name_str, idc.SN_NOCHECK)
     
-## for later? versions of python
+## py3
 import idaapi
 import idautils
 import idc
@@ -29,4 +29,5 @@ for func_adr in XrefsTo(error_sprintf_func, 0):
     name_str = ida_bytes.get_strlit_contents(real_str_adr, -1, ida_nalt.STRTYPE_C)
     if name_str is None:
         continue
-    idc.set_name(idc.get_func_attr(str_adr, idc.FUNCATTR_START), name_str.decode("utf-8"), idc.SN_NOCHECK)
+    if "::" in name_str.decode("utf-8"):
+        idc.set_name(idc.get_func_attr(str_adr, idc.FUNCATTR_START), name_str.decode("utf-8"), idaapi.SN_FORCE)
